@@ -1,0 +1,5 @@
+4
+{"bookName":"FFF","bookJanr":"FOLK","bookCoordinates":{"x":6,"y":8},"bookColor":"RED","creatingTime":0,"words":[]}
+{"bookName":"MBMB","bookJanr":"FOLK","bookCoordinates":{"x":7,"y":7},"bookColor":"BLACK","creatingTime":0,"words":[]}
+{"bookName":"AAA","bookJanr":"CLASSIC","bookCoordinates":{"x":3,"y":3},"bookColor":"RED","creatingTime":0,"words":[]}
+{"bookName":"BBB","bookJanr":"CLASSIC","bookCoordinates":{"x":5,"y":7},"bookColor":"BLUE","creatingTime":0,"words":[]}

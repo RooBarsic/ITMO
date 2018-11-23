@@ -1,0 +1,89 @@
+Java lab 7
+1.  Spring
+2.  JTree
+3.  GridLayout
+4.  JComboBox
+5.  JTextField
+6.  JSpinner
+
+
+Zawita
+a.  Component
+b.  Container
+c.  JComponent
+
+
+
+Swing
+        System.out.println("Hello World!");
+        JFrame frame = new JFrame();
+        frame.setSize(600, 700);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setName("Test frame");
+
+Jframe - okno
+
+JButton - knopka
+
+Cursor - kursor ( raznie vidi kursora mishki )
+
+JTExtField - однострочное поле ввода
+        JTextField jText = new JTextField( 50); - ширина - 50
+        String s = jText.getText(); - для ввода текста с jText
+        jText.setText("login"); - для вставки тескта в jText
+        jText.setEditable(false); - если Тру - можно писать иначе - нельзя
+JPasswordField - для паролей ( скрывает вводимые ссимволы под звездочками * )
+
+Font - для разных стилей
+Font font = new Font("Verdana"(назваение шрифта), Font.ITALIC (стиль), 25 (размер ));
+
+JLabel - поле для показа информации, информацию - не получится скопировать
+    label1.setFont(font); - для установки стиля
+
+ProgressBar - индикатор выполнения работы
+        JProgressBar progressBar1 = new JProgressBar();
+        progressBar1.setMinimum(0);
+        progressBar1.setMaximum(100);
+        progressBar1.setValue(37);
+        progressBar1.setStringPainted(true); - выводит проценты выполнения 
+        progressBar1.setIndeterminate(true); - изменяет анимацию загрузки
+        
+JPanel - панель, на панель можено поставить много чего - включая другую панель
+Jpanel - похож на JFrame
+Jpanel panel1 = new Jpanel();
+Component []comp = panel.getComponenets();
+
+BorderLayout
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
