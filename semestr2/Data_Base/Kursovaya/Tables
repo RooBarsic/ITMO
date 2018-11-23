@@ -1,0 +1,214 @@
+drop table К_Предметы_Станции;
+drop table К_Ископаемые_Персонажа;
+drop table К_Инвентарь_Персонажа;
+drop table К_Предметы_Инвентаря;
+drop table К_Тип_Предметов;
+drop table К_Персонажы;
+drop table К_Космические_Станции;
+drop table К_Виды_Классов;
+drop table К_Рассы;
+drop table К_Граф_Системы;
+drop table К_Ретрансляторы;
+drop table К_Ископаемые_В_Месторождении;
+drop table К_Полезные_Ископаемые;
+drop table К_Месторождения;
+drop table К_Солнечные_Системы;
+drop table К_Звёзды;
+
+
+
+
+drop table К_Звёзды;
+drop table К_Солнечные_Системы;
+drop table К_Месторождения;
+drop table К_Полезные_Ископаемые;
+drop table К_Ископаемые_В_Месторождении;
+drop table К_Ретрансляторы;
+drop table К_Граф_Системы;
+drop table К_Рассы;
+drop table К_Виды_Классов;
+drop table К_Космические_Станции;
+drop table К_Персонажы;
+drop table К_Тип_Предметов;
+drop table К_Предметы_Инвентаря;
+drop table К_Инвентарь_Персонажа;
+drop table К_Ископаемые_Персонажа;
+drop table К_Предметы_Станции;
+
+
+
+
+CREATE TABLE "К_Звёзды" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Масса" real NOT NULL,
+    check("Масса" > 0)
+);
+
+CREATE TABLE "К_Солнечные_Системы" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Звезда" int NOT NULL REFERENCES "К_Звёзды"("id")
+);
+
+CREATE TABLE "К_Месторождения" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Тип" varchar NOT NULL,
+  "Масса" real NOT NULL,
+  "НаличиеАтмосферы" boolean NOT NULL,
+  "MinТемпература" int NOT NULL,
+  "MaxТемпература" int NOT NULL,
+  "СолнечнаяСистема" int NOT NULL REFERENCES "К_ Солнечные_Системы"("id"),
+    check("Масса" > 0),
+    check("Тип" = "Планета" or "Тип" = "Спутник"),
+    check("MinТемпература" <= "MaxТемпература")
+);
+
+CREATE TABLE "К_Полезные_Ископаемые" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Описание" varchar NOT NULL
+);
+
+CREATE TABLE "К_Ископаемые_В_Месторождении" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Месторождение" int NOT NULL REFERENCES "К_Месторождения"("id"),
+  "Ресурс" int NOT NULL REFERENCES "К_ Полезные_Ископаемые"("id"),
+  "Количество" bigint NOT NULL,
+    check(" Количество " >= 0)
+);
+
+CREATE TABLE "К_Ретрансляторы" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Местонахождение" int NOT NULL REFERENCES "К_Солнечные_Системы"("id")
+);
+
+CREATE TABLE "К_Граф_Системы" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Система1" int NOT NULL REFERENCES "К_Солнечные_Системы"("id"),
+  "Система2" int NOT NULL REFERENCES "К_Солнечные_Системы"("id"),
+  "ПримРаст" int NOT NULL,
+    check("Система1" != "Система2"),
+    check("ПримРаст" >= 0)
+);
+
+CREATE TABLE "К_Рассы" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Описание" varchar NOT NULL,
+);
+
+CREATE TABLE "К_Виды_Классов" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Описание" varchar NOT NULL,
+);
+
+CREATE TABLE "К_Космические_Станции" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Масса" real NOT NULL,
+  "СолнечнаяСистема" int NOT NULL REFERENCES "К_Солнечные_Системы"("id"),
+  "Кредиты" int NOT NULL,
+    check("Масса" > 0),
+    check("Кредиты" >= 0)
+);
+
+CREATE TABLE "К_Персонажы" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Имя" varchar NOT NULL,
+  "Расса" int NOT NULL REFERENCES "К_Рассы"("id"),
+  "Класс" int NOT NULL REFERENCES "К_Виды_Классов"("id"),
+  "СолнечнаяСистема" int NOT NULL REFERENCES "К_ Солнечные_Системы"("id"),
+  "Кредиты" int NOT NULL,
+  "Предыстория" varchar NOT NULL,
+    check("Кредиты" >= 0)
+);
+
+CREATE TABLE "К_Тип_Предметов" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL,
+  "Описание" varchar NOT NULL,
+);
+
+CREATE TABLE "К_Предметы_Инвентаря" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Название" varchar NOT NULL
+  "Тип" int NOT NULL REFERENCES "К_Тип_Предметов"("id")
+  "Характеристика" varchar NOT NULL
+);
+
+CREATE TABLE "К_Инвентарь_Персонажа" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Персонаж" int NOT NULL REFERENCES "К_Персонажы"("id"),
+  "Предмет" int NOT NULL REFERENCES "К_Предметы_Инвентаря"("id"),
+  "Количество" int NOT NULL,
+    check("Количество" >= 0)
+);
+
+CREATE TABLE "К_Ископаемые_Персонажа" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Ресурс" int NOT NULL REFERENCES "К_Полезные_Ископаемые"("id"),
+  "Персонаж" int NOT NULL REFERENCES "К_Персонажы"("id"),
+  "Количество" bigint NOT NULL,
+    check("Количество" >= 0)
+);
+
+CREATE TABLE "К_Предметы_Станции" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "Станция" int NOT NULL REFERENCES "К_Космические_Станции"("id"),
+  "Предмет" int NOT NULL REFERENCES "К_Предметы_Инвентаря"("id"),
+  "Цена" int NOT NULL,
+  "Количество" int NOT NULL,
+    check("Количество" >= 0),
+    check("Цена" >= 0)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
