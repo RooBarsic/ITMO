@@ -161,6 +161,7 @@ struct MyList* list_map_mult(struct MyList* list, int (*f)(int)){
     struct ListNode* node = (list->front);
     while(node != NULL){
         (node->element) = f(node->element);
+        node = (node->right);
     }
 
     return list;
@@ -185,6 +186,7 @@ struct MyList* list_iterate(int value, int n, int (*f)(int)){
     for(int i = 1; i <= n; i++){
         list_push_back(list, value);
         value = f(value);
+        //printf("val = %d \n", value);
     }
     return list;
 }
@@ -199,7 +201,6 @@ void print_list(struct MyList* list){
     }
     printf("\n");
 }
-
 
 
 
