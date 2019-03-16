@@ -9,7 +9,7 @@ arr[i] - количество знаков типа i
 для оставшихся знаков чередование не составит труда. Получаем
 X Y X Y X Y X Y X Y X
 тут последовательно между соседними парами знаков - будем вставлять не использованные знаки
-Time complexity O(arr[1] + arr[2] + ... + arr[k])
+Time complexity O(arr[1] + arr[2] + ... + arr[k]) - т.к. мы используем linced list 
 */
 # include <bits/stdc++.h>
 # define sz(s) int(s.size())
