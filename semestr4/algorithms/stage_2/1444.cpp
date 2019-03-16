@@ -12,6 +12,8 @@ http://acm.timus.ru/problem.aspx?space=1&num=1444
 Именно с одной из этих - потому что если начальная точка будет на 
 выпуклой оболочке - то начиная кушать с любой точки - мы сможем наткнутся
 на свои же следы.
+
+Time complexity O(nlog(n))
 */
 # include <bits/stdc++.h>
 # define sz(s) int(s.size())
