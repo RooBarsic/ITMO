@@ -13,10 +13,8 @@ http://acm.timus.ru/problem.aspx?space=1&num=1322
 сдвигов, выберем строку с номером, который нам был изначально 
 дан. В итоге мы получим искомую строку.
 
-*/
-/*
-problem : 1322. Р РЃР С—Р С‘Р С•Р Р…
-http://acm.timus.ru/problem.aspx?space=1&num=1322
+Time complexity O(N + M), where N = s.size(), M - number of
+different elements
 */
 # include <bits/stdc++.h>
 # define sz(s) int(s.size())
@@ -62,6 +60,20 @@ http://acm.timus.ru/problem.aspx?space=1&num=1322
       return 0;
   }
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
   
