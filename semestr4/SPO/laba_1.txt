@@ -1,0 +1,50 @@
+форт язык программирования
+
+Список команд, подлежащих повторению:
+# ls - list directory contents 
+	List of information  about  the FILEs (the current directory by default). 
+# pwd, 
+# cd, 
+# rm, 
+# mv, 
+# cp, 
+# mkdir, 
+# rmdir, 
+# type, 
+# file, 
+# find, 
+# chmod, 
+# ln, 
+# wc, 
+# tee, 
+# cat, 
+# tail, 
+# head, 
+# more, 
+# pg, 
+# touch 
+
+
+Список команд, подлежащих изучению:
+# su, 
+# chown, 
+# chgrp, 
+# less, 
+# split, 
+# join, 
+# paste, 
+# cut, 
+# tr, 
+# cmp, 
+# diff, 
+# patch, 
+# sort, 
+# uniq, 
+# echo, 
+# alias, 
+# ulimit, 
+# umask, 
+# groups, 
+# id, 
+# getent, 
+# xargs 
