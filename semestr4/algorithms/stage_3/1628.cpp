@@ -15,6 +15,8 @@ http://acm.timus.ru/problem.aspx?space=1&num=1628
 
 Отдельно разберем случаи где n или m == 1
 
+Time complexity O(klog(k) + n + m)
+
 */
 # include <bits/stdc++.h>
 # define sz(s) int(s.size())
