@@ -58,7 +58,7 @@ integer i;
 
 always@(posedge clk_c) begin
     if (rst_c) begin
-           $display( " ## new rst " );
+           //$display( " ## new rst " );
            busy <= 1;
            state <= STAGE_0;
            y <= 6;
@@ -68,7 +68,7 @@ always@(posedge clk_c) begin
      end 
 	else if(i <= 1) begin
 	       if(i == 0) mul_rst <= 0;
-	       $display(" %%%%% mul_rst == 1, i = %d ", i);
+	       //$display(" %%%%% mul_rst == 1, i = %d ", i);
 	       i <= i + 1;
      end	   
 	else if(start_c == 1) begin
@@ -84,7 +84,7 @@ always@(posedge clk_c) begin
 					
 					state <= STAGE_1;
 					
-					$display(" ## from STAGE_0 go to state = STAGE_1 ");
+					//$display(" ## from STAGE_0 go to state = STAGE_1 ");
 			    end
 			
 			STAGE_1: if(mul_busy == 0) begin
@@ -100,26 +100,29 @@ always@(posedge clk_c) begin
 					
 					state <= STAGE_2;
 					
-					$display(" ## from STAGE_1 go to state = STAGE_2 "); 
-				end 
-				else $display(" ## waiting in state = STAGE_1     real_state = %d", state);
+					//$display(" ## from STAGE_1 go to state = STAGE_2 "); 
+				  end 
+				else begin 
+				    //$display(" ## waiting in state = STAGE_1     real_state = %d", state);
+				  end
 				
 			STAGE_2 : if(mul_busy == 0) begin
-			    $display(" ## state = %d  mul_result = %d  x = %d y = %d", state, mul_result, x, y);
+			    //$display(" ## state = %d  mul_result = %d  x = %d y = %d", state, mul_result, x, y);
 				if (mul_result <= x) begin
                     y <= y;
                     busy <= 0;
                     state <= FINISH;
-                    $display(" ## from STAGE_2 go to state = FINISH "); 
-                end
+                    //$display(" ## from STAGE_2 go to state = FINISH "); 
+                  end
                 else begin 
 				    y <= y - 1;
                     state <= STAGE_0;
-                    $display(" ## from STAGE_1 go to state = STAGE_0 "); 
-                end
-			end 
-			else $display(" ## waitng in state = STAGE_2 real_state = %d", state);
-			
+                    //$display(" ## from STAGE_1 go to state = STAGE_0 "); 
+                  end
+			  end 
+			else begin
+			    //$display(" ## waitng in state = STAGE_2 real_state = %d", state);
+			  end
 			FINISH : begin
 			    result <= y;
 			    busy <= 0;
