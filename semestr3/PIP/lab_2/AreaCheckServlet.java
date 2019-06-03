@@ -42,8 +42,9 @@ public class AreaCheckServlet extends HttpServlet {
                     if (y >= (-r / 2.) + (x / 2.))
                         pointBean = new PointBean(x, y, r, "Yes");
                     else pointBean = new PointBean(x, y, r, "No");
-                } else if (Math.sqrt((x * x) + (y * y)) * 2. <= r)
+                } else if ((Math.sqrt((x * x) + (y * y)) * 2. <= r) && (-r / 2. <= x) && (x <= 0) && (0 <= y) && (y <= r / 2.)){
                     pointBean = new PointBean(x, y, r, "Yes");
+                }
                 else
                     pointBean = new PointBean(x, y, r, "No");
 
