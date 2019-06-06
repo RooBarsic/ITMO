@@ -35,7 +35,6 @@ sqrt3 dut(.clk_c(clk_c_i),
 		  .busy(res_o),
 		  .result(s_o)
 );
-
 reg lsfr_clk;
 reg lsfr_rst;
 reg lsfr_access;
