@@ -44,9 +44,10 @@ reg [7:0] state;
 reg [7:0] id;
 
 always@(posedge clk) begin
-    $display(" ~ %%% CRC new_data = %b inside_access = %b", new_data, inside_access); 
+    //$display(" ~ %%%%% CRC new_data = %b inside_access = %b", new_data, inside_access); 
     if(rst) begin
         buff <= 0;
+        busy <= 0;
         reseted <= 1;
         inside_access <= 1;
         state <= IDLE;
@@ -55,23 +56,24 @@ always@(posedge clk) begin
     else if(new_data == 0) inside_access <= 1;
     else if((new_data == 1) && (inside_access == 1)) begin
         case(state)
-            IDLE : begin 
+            IDLE : begin
+                //$display("  reseted = %d busy = %d", reseted, busy);
                 if(reseted == 1) begin
                     reseted <= 0;
                     buff <= data;
-                    busy <= 0;
-                    result_crc8 <= data;
-                    inside_access <= 0;
+                    busy <= 1;
+                    state <= FINISH;
                  end
                 else begin
                     id <= 7; 
+                    busy <= 1;
                     state <= DO_XOR;
                  end
              end
             DO_XOR : begin
-                $display(" %%% CRC  id = %d buff = %b", id, buff);
+                //$display(" %%% CRC  id = %d buff = %b", id, buff);
                 if(buff[7] == 1) begin
-                    $display(" %%% CRC  do xor ");
+                    //$display(" %%% CRC  do xor ");
                     buff <= buff ^ polynom;
                  end
                 state <= DO_SHIFT;
@@ -96,34 +98,10 @@ always@(posedge clk) begin
                 inside_access <= 0;
                 state <= IDLE;
                 result_crc8 <= buff;
-                $display(" %%% CRC   resultt = %b", buff);
+                //$display(" %%% CRC   resultt = %b", buff);
              end
         endcase
     end
 end
 endmodule
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
