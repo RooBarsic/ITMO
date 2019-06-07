@@ -23,8 +23,8 @@
 module control_logic(
     input rst,
     input clk,
-    input start_stop_testing,
-    input start_calculation,
+    input testing_button_status,
+    input sqrt3_button_status,
     input get_lsfr_base_from_data,
     input [7:0] input_data,
     output reg busy,
@@ -33,14 +33,14 @@ module control_logic(
 );
 
 reg lsfr_rst;
-reg lsfr_access;
+reg lsfr_start;
 reg [7:0] lsfr_base_number;
 wire lsfr_busy;
 wire [7:0] lsfr_result;
 generate_next_LSFR div1(
     .clk(clk),
     .rst(lsfr_rst),
-    .outside_access(lsfr_access),
+    .outside_access(lsfr_start),
     .base_number(lsfr_base_number),
     .busy(lsfr_busy),
     .generated_number(lsfr_result)
@@ -62,216 +62,206 @@ sqrt3 div2(
 
 reg crc_rst;
 reg [7:0] crc_data;
-reg crc_new_data;
+reg crc_start;
 wire crc_busy;
 wire [7:0] crc_result;
 CRC8_calculator driv3(
     .clk(clk),
     .rst(crc_rst),
     .data(crc_data),
-    .new_data(crc_new_data),
+    .new_data(crc_start),
     .busy(crc_busy),
     .result_crc8(crc_result)
 );
 
-reg testing;
 reg testing_access;
-reg calc_access;
-reg [3:0] kol_testing;
+reg sqrt3_access;
+reg [3:0] kol_testing = 0;
 reg [8:0] id_test;
 
-reg [7:0] stage;
+reg [7:0] commutator;
 localparam WAITING = 4'b0000;
-localparam CALC_IDLE = 4'b0001;
-localparam TESTING_IDLE = 4'b0010;
-localparam SET_CALC_ACCESS = 4'b0011;
-localparam CALC_WAITING = 4'b0100;
-localparam TESTING_GENERATE_NUMBER = 4'b0101;
-localparam TESTING_WAITING_GENERATOR = 4'b0110;
-localparam TESTING_WAITING_SQRT3 = 4'b0111;
-localparam TESTING_WAITING_CRC = 4'b1000;
-localparam TESTING_FINISH = 4'b1001;
+localparam CALC_SQRT = 4'b0001;
+localparam DO_TESTING = 4'b0010;
+
+reg [7:0] sqrt_stage;
+localparam SQRT_INIT = 4'b0000;
+localparam WAITING_SQRT = 4'b0001;
+
+reg [7:0] testing_stage;
+localparam TEST_INIT_BEGIN = 4'b0000;
+localparam TEST_INIT_FINISH = 4'b0001;
+localparam TEST_GENERATE_NUMBER = 4'b0010;
+localparam TEST_WAIT_GENERATOR = 4'b0011;
+localparam TEST_CALC_SQRT3 = 4'b0100;
+localparam TEST_WAIT_SQRT3 = 4'b0101;
+localparam TEST_CALC_CRC = 4'b0110;
+localparam TEST_WAIT_CRC = 4'b0111;
+localparam TEST_FINISH = 4'b1000;
 
 always@(posedge clk) begin
-    $display(" ~~~~~~~~~~~~ control logic info : id_test = %d", id_test);
+    //$display(" ~~~~~~~~~~~~ control logic info : id_test = %d", id_test);
+    number_of_testing <= kol_testing;
     if(rst) begin
-        stage <= WAITING;
-        
-        testing <= 0;
-        testing_access <= 1;
-        calc_access <= 1;
-        kol_testing <= 0;
-        id_test <= 0;
-        
         busy <= 0;
-        number_of_testing <= 0;
         result <= 0;
+        commutator <= WAITING;
+        
+        testing_access <= 1;
+        sqrt3_access <= 1;
         
         lsfr_rst <= 1;
-        lsfr_access <= 0;
-        lsfr_base_number <= 0;
-    
+        lsfr_start <= 0;
+        
         sqrt3_rst <= 1;
         sqrt3_start <= 0;
-        sqrt3_data <= 0;
         
         crc_rst <= 1;
-        crc_data <= 0;
-        crc_new_data <= 0;
-
+        crc_start <= 0;
      end
     else begin
+        lsfr_rst <= 0;
         sqrt3_rst <= 0;
         crc_rst <= 0;
-        lsfr_rst <= 0;
-        if((start_calculation == 1) && (calc_access == 1) && (busy == 0)) begin
-            calc_access <= 0;
-            busy <= 1;
-            stage <= CALC_IDLE;
-         end
-        else if(start_calculation == 0) calc_access <= 1;
-        
-        if((start_stop_testing == 1) && (testing_access == 1)) begin
-            $display(" testing ... ");
-            testing_access <= 0;
-            if(testing == 0) begin
-                busy <= 1;
-                stage <= TESTING_IDLE;
-             end
-            else begin
-                busy <= 0;
-                result <= 0;
-                
-                lsfr_rst <= 0;
-                lsfr_access <= 0;
-                lsfr_base_number <= 0;
-            
-                sqrt3_rst <= 0;
-                sqrt3_start <= 0;
-                sqrt3_data <= 0;
-                
-                crc_rst <= 0;
-                crc_data <= 0;
-                crc_new_data <= 0;
-                stage <= WAITING;
-             end
-         end
-        else if(start_stop_testing == 0) testing_access <= 1;
      end
-    case(stage)
-        WAITING : begin
-            //$display(" %%% stage = WAITING");
-         end
-        CALC_IDLE : begin
-            //$display(" %%% stage = CALC_IDLE");
-            sqrt3_rst <= 1;
-            stage <= SET_CALC_ACCESS;
-         end
-        SET_CALC_ACCESS : begin 
-            //$display(" %%% stage = SET_CALC_ACCESS   resultt = %b input = %b", sqrt3_result, input_data);
-            sqrt3_rst <= 0;
-            if(sqrt3_busy == 0) begin
-                sqrt3_start <= 1;
-                sqrt3_data <= input_data;
-             end
-            else if(sqrt3_busy == 1) stage <= CALC_WAITING;
-         end
-        CALC_WAITING : begin
-            //$display(" %%% stage = CALC_WAITING  resultt = %b input = %b", sqrt3_result, input_data);
-            if(sqrt3_busy == 0) begin
-                sqrt3_start <= 0;
-                result <= sqrt3_result;
-                busy <= 0;
-                stage <= WAITING;
-             end
-         end
-        TESTING_IDLE : begin
-            $display(" %%% stage = TESTING_IDLE");
-            id_test <= 256;
-            crc_rst <= 1;
-            lsfr_rst <= 1;
-            if(get_lsfr_base_from_data) lsfr_base_number <= input_data;
-            else lsfr_base_number <= 0;
-            stage <= TESTING_GENERATE_NUMBER;
-         end
-        TESTING_GENERATE_NUMBER : begin
-            $display(" %%% stage = TESTING_GENERATE_NUMBER     id_test = %d  next_num = %b", id_test, lsfr_result);
-            lsfr_rst <= 0;
-            lsfr_access <= 1;
-            if(lsfr_busy == 1) begin 
-                id_test <= id_test - 1;
-                stage <= TESTING_WAITING_GENERATOR;
-             end
-         end
-        TESTING_WAITING_GENERATOR : begin
-            $display(" %%% stage = TESTING_WAITING_GENERATOR  id_test = %d  next_num = %b  busy = %b", id_test, lsfr_result, lsfr_busy);
-            if(lsfr_busy == 0) begin
-                lsfr_access <= 0;
-                sqrt3_rst <= 0;
-                sqrt3_start <= 1;
-                sqrt3_data <= lsfr_result;
-                if(sqrt3_busy == 1) stage <= TESTING_WAITING_SQRT3;
-             end
-         end
-        TESTING_WAITING_SQRT3 : begin
-            $display(" %%% stage = TESTING_WAITING_SQRT3");
-            if(sqrt3_busy == 0) begin
-                sqrt3_start <= 0;
-                crc_new_data <= 1;
-                crc_rst <= 0;
-                crc_data <= sqrt3_result;
-                $display("    num = %b sqrt = %b", lsfr_result, sqrt3_result);
-                stage <= TESTING_WAITING_CRC;
-             end
-         end
-        TESTING_WAITING_CRC : begin
-            crc_rst <= 0;
-            $display(" %%% stage = TESTING_WAITING_CRC");         
-            if(crc_busy == 0) begin
-                crc_new_data <= 0;
-                result <= crc_result;
-                if(id_test == 0) begin // Finish
-                    kol_testing <= kol_testing + 1;
-                    stage <= TESTING_FINISH;
-                 end
-                else stage <= TESTING_GENERATE_NUMBER; 
-             end
-        end
-       TESTING_FINISH : begin
-            $display(" %%% stage = TESTING_FINISH");
-            number_of_testing <= kol_testing;
-            stage <= WAITING;
-            busy <= 0;
-        end
-     endcase
     
+    if((sqrt3_access == 1) && (sqrt3_button_status == 1) && (busy == 0)) begin
+        // начинаем шитать sqrt3
+        busy <= 1;
+        sqrt3_access <= 0;
+        commutator <= CALC_SQRT;
+        sqrt_stage <= SQRT_INIT;
+     end
+    else if((testing_access == 1) && (testing_button_status == 1)) begin
+        if(busy == 0) begin
+            // начинаем тест
+            busy <= 1;
+            testing_access <= 0;
+            commutator <= DO_TESTING;
+            testing_stage <= TEST_INIT_BEGIN;
+         end
+        else if((commutator == DO_TESTING) && (testing_stage != TEST_FINISH)) begin
+            // останавливаем тест
+            busy <= 0;
+            testing_access <= 0;
+            commutator <= WAITING;
+         end
+     end
+    
+    if((sqrt3_button_status == 0) && (busy == 0)) sqrt3_access <= 1; // даём разрешение на подсчёт sqrt3
+    if((testing_button_status == 0) && (busy == 0)) testing_access <= 1; // даём разрешение на тестирование
+    
+    case(commutator)
+        WAITING : begin
+            // ждём команды от пользователя
+         end
+        CALC_SQRT : begin
+            // дали команду на подсчёт sqrt3
+            //$display(" ~~~ ## CALC_SQRT ");
+            case(sqrt_stage)
+                SQRT_INIT : begin
+                    // инициализация для подсчёта sqrt3
+                    //$display(" ~~~ ## # SQRT INIT");
+                    if(sqrt3_start == 0) begin
+                        sqrt3_data <= input_data;
+                        sqrt3_start <= 1;
+                     end
+                    else if(sqrt3_busy == 1) sqrt_stage <= WAITING_SQRT;
+                 end
+                WAITING_SQRT : begin
+                    // ждём окончания вычислений
+                    //$display(" ~~~ ## # SQRT WAITING ");
+                    if(sqrt3_busy == 0) begin
+                        //$display(" ~~~ ## # % SQRT busy = 0 data = %d sqrt_result = %d", input_data, sqrt3_result);
+                        sqrt3_start <= 0;
+                        busy <= 0;
+                        commutator <= WAITING;
+                        result <= sqrt3_result;
+                     end
+                 end
+             endcase
+         end
+        DO_TESTING : begin
+            // дали команду на тестирование
+            //$display(" ~~~ @@ DO_TESTING ");
+            case(testing_stage)
+                TEST_INIT_BEGIN : begin
+                    //$display(" ~~~ @@ @ TEST_INIT_BEGIN");
+                    id_test <= 255; /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    crc_rst <= 1;
+                    lsfr_rst <= 1;
+                    lsfr_start <= 0;
+                    if(get_lsfr_base_from_data) lsfr_base_number <= input_data;
+                    else lsfr_base_number <= 1;
+                    testing_stage <= TEST_INIT_FINISH;
+                 end
+                TEST_INIT_FINISH : begin
+                    //$display(" ~~~ @@ @ TEST_INIT_FINISH");
+                    crc_rst <= 0;
+                    lsfr_rst <= 0;
+                    testing_stage <= TEST_GENERATE_NUMBER;
+                 end
+                TEST_GENERATE_NUMBER : begin
+                    //$display(" ~~~ @@ @ TEST_GENERATE_NUMBER");
+                    if(lsfr_start == 0) lsfr_start <= 1;
+                    else if(lsfr_busy == 1) testing_stage <= TEST_WAIT_GENERATOR;
+                 end
+                TEST_WAIT_GENERATOR : begin
+                    //$display(" ~~~ @@ @ TEST_WAIT_GENERATOR");
+                    if(lsfr_busy == 0) begin
+                        //$display(" ~~~ @@ @ % TEST GENERATOR busy = 0 ");
+                        lsfr_start <= 0;
+                        testing_stage <= TEST_CALC_SQRT3;
+                     end
+                 end
+                TEST_CALC_SQRT3 : begin
+                    //$display(" ~~~ @@ @ TEST_CALC_SQRT");
+                    sqrt3_data <= lsfr_result;
+                    if(sqrt3_start == 0) sqrt3_start <= 1;
+                    else if(sqrt3_busy == 1) testing_stage <= TEST_WAIT_SQRT3;
+                 end
+                TEST_WAIT_SQRT3 : begin
+                    //$display(" ~~~ @@ @ TEST_WAIT_SQRT");
+                    if(sqrt3_busy == 0) begin
+                        //  Last BUG    ??????????????????   $display(" KUKUKUKUKUKU ~~~ @@ @ % TEST SQRT FINISH     x = %d sqrt_result = %d ", lsfr_result, sqrt3_result);
+                        sqrt3_start <= 0;
+                        testing_stage <= TEST_CALC_CRC;
+                     end
+                 end
+                TEST_CALC_CRC : begin
+                    //$display(" ~~~ @@ @ TEST_CALC_CRC   crc_start = %d crc_busy = %d", crc_start, crc_busy);
+                    crc_data <= sqrt3_result;
+                    if(crc_start == 0) crc_start <= 1;
+                    else if(crc_busy == 1) testing_stage <= TEST_WAIT_CRC;
+                 end
+                TEST_WAIT_CRC : begin
+                    //$display(" ~~~ @@ @ TEST_WAIT_CRC");
+                    if(crc_busy == 0) begin
+                        //  Last BUG    ??????????????????   $display(" ~~~ @@ @ % TEST CRC FINISH");
+                        crc_start <= 0;
+                        result <= crc_result;
+                        if(id_test == 0) begin
+                            testing_stage <= TEST_FINISH;
+                            kol_testing <= kol_testing + 1;
+                         end
+                        else begin
+                            id_test <= id_test - 1;
+                            testing_stage <= TEST_GENERATE_NUMBER;
+                         end
+                     end
+                 end
+                TEST_FINISH : begin
+                    $display(" ~~~ @@ @ TEST_FINISH");
+                    busy <= 0;
+                    number_of_testing <= kol_testing;
+                    result <= crc_result;
+                    commutator <= WAITING;
+                 end
+             endcase
+         end
+     endcase
 end    
 endmodule
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
