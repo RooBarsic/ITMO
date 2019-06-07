@@ -1,1 +1,24 @@
 Базой ( начальное значение ) для работы генератора LSFR во время проверки режима тестирования программы - было число 1.
+
+
+
+
+
+
+
+
+Исходные коды можно удобно посмотреть тут :
+https://github.com/RooBarsic/ITMO/tree/master/semestr4/Scamotekhnika/lab_4
+
+Описание работы блока на языке Verilog состоит из нескольких частей :
+модуль умножения - 
+  https://github.com/RooBarsic/ITMO/blob/master/semestr4/Scamotekhnika/lab_4/mult.v
+модуль функции - 
+  https://github.com/RooBarsic/ITMO/blob/master/semestr4/Scamotekhnika/lab_4/sqrt3.v
+модуль с реализацией LSRF ( для генерации чисел ) - 
+  https://github.com/RooBarsic/ITMO/blob/master/semestr4/Scamotekhnika/lab_4/generate_next_LSFR.v
+модуль с реализацией CRC8 - 
+  https://github.com/RooBarsic/ITMO/blob/master/semestr4/Scamotekhnika/lab_4/CRC8_calculator.v
+тестовое окружение ( созданы тесты для каждого модуля ) - 
+  https://github.com/RooBarsic/ITMO/blob/master/semestr4/Scamotekhnika/lab_4/sqrt3_tb.v
+
