@@ -20,6 +20,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+/// Для знакомства с CRC8 - можно посмотреть тут
+/// https://github.com/FanEm/CRC8/wiki/CRC8
+/// https://dic.academic.ru/dic.nsf/ruwiki/9765
+/// https://habr.com/ru/post/278171/
 module CRC8_calculator(
     input clk,
     input rst,
@@ -105,5 +109,4 @@ always@(posedge clk) begin
     end
 end
 endmodule
-
 
