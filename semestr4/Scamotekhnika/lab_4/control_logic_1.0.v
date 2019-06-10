@@ -132,6 +132,9 @@ always@(posedge clk) begin
         crc_rst <= 0;
      end
     
+    /// new adding
+    number_of_testing <= kol_testing;
+    
     if((sqrt3_access == 1) && (sqrt3_button_status == 1) && (busy == 0)) begin
         // Если есть прищёл сингал на подсчёт sqrt3; и у нас есть разрешение на это; и мы сейчас не заняты, то
         // начинаем шитать sqrt3
