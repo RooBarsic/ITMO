@@ -1,11 +1,10 @@
 #!/bin/bash
-fileName=$1 #
-access=$2
+fileName=$1 # имя файла
 if ls -l $fileName; then
 	if [ -n "$2" ]; then
-		access=$2
+		access=$2 # права на файл
 	else 
-		access='???'
+		access='???' # дефолтные права на файл
 	fi
 	ls_result=$(ls -l $fileName)
 	i=0
