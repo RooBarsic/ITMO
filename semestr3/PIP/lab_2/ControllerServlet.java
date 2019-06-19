@@ -21,17 +21,20 @@ public class ControllerServlet extends HttpServlet {
             String strR = request.getParameter("r");
             System.out.println(" GET new request x = " + strX + " y = " + strY + " r = " + strR + " page = " + request.getParameter("page"));
 
-            if ((strX != null) && (strY != null) && (strR != null)) {
+            if ((strX != null) && (strY != null) && (strR != null) &&
+                    (strX.length() > 0) && (strY.length() > 0) && (strR.length() > 0)) {
+                System.out.println(" x y r - ne null ");
                 Double x = Double.parseDouble(strX);
                 Double y = Double.parseDouble(strY);
                 Double r = Double.parseDouble(strR);
                 //response.sendRedirect("./AreaCheckServlet");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("./AreaCheckServlet");
                 dispatcher.forward(request, response);
-            } else if (request.getParameter("page") != null) {
-                //response.sendRedirect("./pages/MainFrame.jsp");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("./pages/MainFrame.jsp");
-                dispatcher.forward(request, response);
+            } else /* if (request.getParameter("page") != null) */ {
+                System.out.println(" do redirection ");
+                response.sendRedirect("./pages/MainFrame.jsp");
+                //RequestDispatcher dispatcher = request.getRequestDispatcher("./pages/MainFrame.jsp");
+                //dispatcher.forward(request, response);
             }
         }
         catch(Exception e){
