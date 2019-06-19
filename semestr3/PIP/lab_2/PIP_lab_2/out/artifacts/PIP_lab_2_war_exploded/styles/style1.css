@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body{
+    background-image: url("https://images4.alphacoders.com/758/thumb-1920-75844.jpg");
+    background-size: cover;
+    background-attachment:fixed;
+}
+
+#zoneTable{
+    width: 100%;
+    height: 100%;
+}
+
+#zoneHat{
+    height: 10%;
+}
+
+#zoneContent{
+    height: 90%;
+}
+
+#hat{
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    background-color: MidnightBlue;
+    background-size: cover;
+}
+
+.linkingText{
+    color: Crimson;
+    opacity:0.7;
+    text-align: center;
+}
+
+.linkingText:hover{
+    opacity:1;
+    color:black;
+    background-color:white;
+    display: solid;
+}
+
+#hatTable{
+    width:100%;
+    opacity:0.7;
+    border: 3px solid blue;
+    border-radius: 3px;
+    background-color:skyblue;
+}
+
+.hatTable:hover{
+    opacity: 1;
+}
+
+.hatTableTd{
+    text-align:center;
+    border: 3px solid green;
+}
+
+.hatTableTd:hover{
+
+    opacity: 1;
+    background-color: lightgreen;
+}
+
+#content{
+    margin-left: 10%;
+    opacity: 0.7;
+    width: 80%;
+}
+
+#content:hover{
+    opacity: 1;
+}
+
+.contentTable{
+    width:100%;
+    height:10px;
+    opacity:0.7;
+    border-radius: 3px;
+
+}
+
+.contentTableTd{
+    background-color:skyblue;
+    text-align:center;
+    border: 3px solid green;
+}
+
+#footer{
+    background-size: 100%;
+    width: 100%;
+    opacity: 0.7;
+    background-color: MidnightBlue;
+}
+
+#plotCanvas{
+    border: 3px solid red;
+}
+
+
