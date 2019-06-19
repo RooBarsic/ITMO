@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
 
 @WebServlet(name = "AreaCheckServlet")
 public class AreaCheckServlet extends HttpServlet {
@@ -22,7 +24,7 @@ public class AreaCheckServlet extends HttpServlet {
             PointsArray pointsArray = (PointsArray) request.getSession().getAttribute("PointsArrayBean");
             if (pointsArray == null) pointsArray = new PointsArray();
 
-            int startTime = (int) System.currentTimeMillis();
+            long startTime = (long) (new Date()).getTime() ;//System.currentTimeMillis();
             String strX = request.getParameter("x");
             String strY = request.getParameter("y");
             String strR = request.getParameter("r");
@@ -39,7 +41,7 @@ public class AreaCheckServlet extends HttpServlet {
                 if ((0 <= x) && (x <= r)) {
                     if ((0 <= y) && (y <= r))
                         pointBean = new PointBean(x, y, r, "Yes");
-                    if (y >= (-r / 2.) + (x / 2.))
+                    else if ((y <= 0) && (y >= (-r / 2.) + (x / 2.)))
                         pointBean = new PointBean(x, y, r, "Yes");
                     else pointBean = new PointBean(x, y, r, "No");
                 } else if ((Math.sqrt((x * x) + (y * y)) * 2. <= r) && (-r / 2. <= x) && (x <= 0) && (0 <= y) && (y <= r / 2.)){
@@ -49,18 +51,24 @@ public class AreaCheckServlet extends HttpServlet {
                     pointBean = new PointBean(x, y, r, "No");
 
                 if (pointBean != null) {
-                    pointBean.setTimeToWork((int) System.currentTimeMillis() - startTime);
+                    pointBean.setTimeToWork((int)((long) (new Date()).getTime() - startTime));
                     pointsArray.addNewPointBean(pointBean);
+
+                    PrintWriter printWriter = new PrintWriter(response.getWriter());
+                    if(pointBean.getResult().equals("Yes")) printWriter.print("1");
+                    else printWriter.print("0");
+                    printWriter.flush();
                 }
 
                 request.getSession().setAttribute("PointsArrayBean", pointsArray);
                 System.out.println("   $$ pointsArray = " + pointsArray);
+
             }
             if (request.getParameter("page") != null) {
                 System.out.println("normal 2 send redirection ");
-                //response.sendRedirect("./pages/TestJSP.jsp");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("./pages/MainFrame.jsp");
-                dispatcher.forward(request, response);
+                response.sendRedirect("./pages/MainFrame.jsp");
+                //RequestDispatcher dispatcher = request.getRequestDispatcher("./pages/MainFrame.jsp");
+                //dispatcher.forward(request, response);
             }
         }
         catch (Exception e){
