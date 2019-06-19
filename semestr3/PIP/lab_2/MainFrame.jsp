@@ -37,7 +37,7 @@
                         <option> 2 </option>
                     </select>
                     <br/>
-                    Значение Y : <input id="Y" placeholder="(-5...5)" type="text" v-on:blur="check_Y"> <br/>
+                    Значение Y : <input id="Y" placeholder="(-5...5)" pattern="-?([0-4]{0,1})(\.\d{0,3})?" type="text" v-on:blur="check_Y"> <br/>
                     <h4 style="color: red;"> {{ validationMessage }} </h4>
                     <br/>
                     Значение R :
@@ -83,7 +83,7 @@
                                     out.println(row);
                                 }
                             }
-                            else out.print("PointsArrau === NULLL !!!! ");
+                            // else out.print("PointsArrau === NULLL !!!! ");
                         %>
                     </table>
                 </td>
