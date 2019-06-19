@@ -44,3 +44,4 @@ public class PointBean {
         this.timeToWork = timeToWork;
     }
 }
+
