@@ -14,9 +14,6 @@ int pairFrequency[characterTypesNumber][characterTypesNumber];
 int getCharacterId(char e){
     if(e == ' ')
         return 0;
-    else if((e == '!') || (e == '"') || (e == '\'') || (e == '(') || (e == ')') || (e == '*')
-        || (e == ',') || (e == '-') || (e == '.') || (e == ':') || (e == ';') || (e == '?'))
-        return 1;
     else if(('a' <= e) && (e <= 'z'))
         return 2 + int(e) - int('a');
     else if(('A' <= e) && (e <= 'Z'))
@@ -24,6 +21,8 @@ int getCharacterId(char e){
     else if(('0' <= e) && (e <= '9')){
         return 2 + 26 + int(e) - int('0');
     }
+    else
+        return 1;
 }
 
 void printCharacterById(int id){
@@ -59,14 +58,15 @@ double calcEntropy(){
     for(int i = 0; i < characterTypesNumber; i++){
         if(frequency[i] > 0){
             double probabilityy = (1.0 * frequency[i]) / (1.0 * charactersNumber);
-            double characterEntropy = probabilityy * (log(probabilityy) / log(2.0));
-            globalEntropy -= characterEntropy;
+            double characterEntropy = -((log(probabilityy) / log(2.0)));
+            globalEntropy += probabilityy * characterEntropy;
 
-            cout << " symbol '";
+            cout << "";
             printCharacterById(i);
-            cout << fixed << setprecision(5) << "' "
-                 << "    probability : " << probabilityy
-                 << "    Entropy : " << characterEntropy << '\n';
+            cout << fixed << setprecision(5)
+                 << "        "
+                 << probabilityy
+                 << "        " << characterEntropy << '\n';
         }
     }
     return globalEntropy;
@@ -80,8 +80,8 @@ double calcPairEntropy(){
             for (int j = 0; j < characterTypesNumber; j++) {
                 if (pairFrequency[i][j] > 0) {
                     double pairProbability = (1.0 * pairFrequency[i][j]) / (1.0 * (charactersNumber - 1));
-                    double pairEntropy = pairProbability * (log(pairProbability) / log(2.0));
-                    globalEntropy -= probability * pairEntropy;
+                    double pairEntropy = -((log(pairProbability) / log(2.0)));
+                    globalEntropy += pairProbability * probability * pairEntropy;
 
                     cout << " pair '";
                     printCharacterById(i);
