@@ -4,14 +4,13 @@
 #include <iomanip>
 #include <zconf.h>
 #include <algorithm>
-#include <set>
 
 using namespace std;
-const int characterTypesNumber = 80;
+const int characterTypesNumber = 50;
 int charactersNumber = 0;
 int frequency[characterTypesNumber];
 int pairFrequency[characterTypesNumber][characterTypesNumber];
-set<char> stt;
+
 int getCharacterId(char e){
     if(e == ' ')
         return 0;
@@ -26,12 +25,14 @@ int getCharacterId(char e){
         return 2 + 26 + int(e) - int('0');
     }
 }
+
 void printCharacterById(int id){
     if(id == 0) cout <<  " ";
     else if(id == 1) cout << ".";
     else if(id <= 27) cout << char(id - 2 + int('a'));
     else cout << char(id -28 + int('0'));
 }
+
 void calcFrequencies(const string& fileName){
     fill(frequency, frequency + characterTypesNumber, 0);
     for(int i = 0; i < characterTypesNumber; i++){
@@ -43,7 +44,6 @@ void calcFrequencies(const string& fileName){
     while(getline(fileReader, fileRow)){
         charactersNumber += fileRow.size();
         for(int i = 0; i < fileRow.size(); i++){
-            stt.insert(fileRow[i]);
             int characterId = getCharacterId(fileRow[i]);
             frequency[characterId]++;
             if(i > 0){
@@ -53,6 +53,7 @@ void calcFrequencies(const string& fileName){
     }
     fileReader.close();
 }
+
 double calcEntropy(){
     double globalEntropy = 0.0;
     for(int i = 0; i < characterTypesNumber; i++){
@@ -70,6 +71,7 @@ double calcEntropy(){
     }
     return globalEntropy;
 }
+
 double calcPairEntropy(){
     double globalEntropy = 0.0;
     for(int i = 0; i < characterTypesNumber; i++){
@@ -93,9 +95,11 @@ double calcPairEntropy(){
     }
     return globalEntropy;
 }
+
 bool fileExists (const char *fname){
     return access(fname,0) != -1;
 }
+
 int main() {
     string fileName;
     cout << " Enter the file name : ";
@@ -106,8 +110,6 @@ int main() {
         cout << fixed << setprecision(6) << " global entropy = " << globalEntropy << "\n\n";
         double globalPairEntropy = calcPairEntropy();
         cout << fixed << setprecision(6) << " global pair entropy = " << globalPairEntropy << '\n';
-
-        cout << "sz = " << stt.size();
     }
     else {
         cout << " file not exist \n";
