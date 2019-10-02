@@ -2,7 +2,7 @@
 #include <fstream>
 #include <cmath>
 #include <iomanip>
-#include <zconf.h>
+//#include <czconf>
 #include <algorithm>
 #include <map>
 #include <deque>
@@ -108,17 +108,21 @@ void findShenonCodes(vector< char > nodeState, string code, int globalSum){
         shenonAnswer.push_back({nodeState[0], code});
     }
     else if(nodeState.size() > 0){
+        vector< char > left;
+        int leftSum = 0;
         vector< char > right;
         int rightSum = 0;
-        for(int i = nodeState.size() - 1; i >= 1; i--){
-            rightSum += characterFrequency[nodeState[i]];
-            right.push_back(nodeState[i]);
-            nodeState.pop_back();
-            if(globalSum - rightSum <= rightSum){
-                break;
+        for(int i = nodeState.size() - 1; i >= 0; i--){
+            if(leftSum < rightSum){
+                left.push_back(nodeState[i]);
+                leftSum += characterFrequency[nodeState[i]];
+            }
+            else {
+                rightSum += characterFrequency[nodeState[i]];
+                right.push_back(nodeState[i]);
             }
         }
-        findShenonCodes(nodeState, code + "1", globalSum - rightSum);
+        findShenonCodes(left, code + "1", leftSum);
         findShenonCodes(right, code + "0", rightSum);
     }
 }
@@ -128,7 +132,8 @@ bool compareCharacter2(pair< char, string > left, pair< char, string > right){
     return 0;
 }
 int main() {
-     calcFrequency("kuku1.txt");
+    freopen("output.txt","w",stdout);
+     calcFrequency("test.txt");
     runXaffman();
     std::cout << "Hello, World!" << std::endl;
     findShenonCodes(characters, "", fileCharactersNumber);
@@ -137,8 +142,8 @@ int main() {
     double averageShenonLength = 0.0;
     for(auto a : shenonAnswer){
         string code = a.second;
-        double probability = (1.0 * characterFrequency[a.first]) / (1.0 * fileCharactersNumber)
-        averageShenonLength += code.size() * 1.0) * probability;
+        double probability = (1.0 * characterFrequency[a.first]) / (1.0 * fileCharactersNumber);
+        averageShenonLength += (code.size() * 1.0) * probability;
         cout << a.first << "\t" << characterFrequency[a.first] << "\t" << a.second << "\t" << a.second.size() << '\n';
     }
     cout << fixed << setprecision(7) << " averageShenonLength = " << averageShenonLength << '\n';
@@ -147,8 +152,8 @@ int main() {
     double averageXaffmanLength = 0.0;
     for(auto a : xaffmanAnswer){
         string code = a.second;
-        double probability = (1.0 * characterFrequency[a.first]) / (1.0 * fileCharactersNumber)
-        averageXaffmanLength += code.size() * 1.0) * probability;
+        double probability = (1.0 * characterFrequency[a.first]) / (1.0 * fileCharactersNumber);
+        averageXaffmanLength += (code.size() * 1.0) * probability;
         cout << a.first << "\t" << characterFrequency[a.first] << "\t" << a.second << "\t" << a.second.size() << '\n';
     }
     cout << fixed << setprecision(7) << " averageXaffmanLength = " << averageXaffmanLength << '\n';
