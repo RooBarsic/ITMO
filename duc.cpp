@@ -14,7 +14,7 @@ int fileCharactersNumber = 0;
 map<char, int > characterFrequency;
 vector< char > characters;
 char convertChar(char e){
-    switch (e){
+    switch (e){     // заменяем символы пробел, " ' \ ( ) * , - ! : ; ? . на '.' 
         case ' ':
         case '"':
         case '\'':
