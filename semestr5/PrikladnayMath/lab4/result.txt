@@ -1,0 +1,33 @@
+what options do you want
+1. Encode
+2. Decode
+3. Exit
+1
+please input string, which you want to encode
+duc
+100011010100010011100101000111000011
+what options do you want
+1. Encode
+2. Decode
+3. Exit
+2
+please input string, which you want to decode
+100011010100010011100101000111000011
+Right data is duc
+what options do you want
+1. Encode
+2. Decode
+3. Exit
+2
+please input string, which you want to decode
+100011010100010011100101000111000010 #we changed the last bit
+Code is wrong at 35
+Right data is duc
+what options do you want
+1. Encode
+2. Decode
+3. Exit
+3
+
+Process returned 0 (0x0)   execution time : 26.724 s
+Press any key to continue.
