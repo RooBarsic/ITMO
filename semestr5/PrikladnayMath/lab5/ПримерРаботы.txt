@@ -1,0 +1,21 @@
+ get message : 01101011011
+ get polynom : 10011
+ get number of info bits : 4
+ coded message = 011010110111110
+ get reseived message = 011010110111100
+ was error in position = 13
+      decoded message = 011010110111110
+
+ get reseived message = 011010110111110
+ No error ! 
+      decoded message = 011010110111110
+
+ get reseived message = 011010111111110
+ was error in position = 8
+      decoded message = 011010110111110
+
+ get reseived message = 010010110111110
+ was error in position = 2
+      decoded message = 011010110111110
+
+ get reseived message = 
