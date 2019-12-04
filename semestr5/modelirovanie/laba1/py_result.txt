@@ -1,0 +1,434 @@
+
+farruxkari-osx:Laba1 farruxkarimov$ 
+farruxkari-osx:Laba1 farruxkarimov$ 
+farruxkari-osx:Laba1 farruxkarimov$ 
+farruxkari-osx:Laba1 farruxkarimov$ 
+farruxkari-osx:Laba1 farruxkarimov$ 
+farruxkari-osx:Laba1 farruxkarimov$ 
+farruxkari-osx:Laba1 farruxkarimov$ 
+farruxkari-osx:Laba1 farruxkarimov$ 
+farruxkari-osx:Laba1 farruxkarimov$ python main.py
+Загружена трасса из {len(input_data)} чисел из файла {path}
+Оценка математического ожидания для {n} элементов: {expected_value}
+Оценка диперсии для {n} элементов: {dispersion}
+Оценка среднеквадратического отклонения для {n} элементов: {standard_deviation}
+Оценка коэффициента вариации для {n} элементов: {variation}
+Эпсилон 0.90 ({n} элементов): {epsilon_90}
+Эпсилон 0.95 ({n} элементов): {epsilon_95}
+Эпсилон 0.99 ({n} элементов): {epsilon_99}
+()
+Оценка математического ожидания для {n} элементов: {expected_value}
+Оценка диперсии для {n} элементов: {dispersion}
+Оценка среднеквадратического отклонения для {n} элементов: {standard_deviation}
+Оценка коэффициента вариации для {n} элементов: {variation}
+Эпсилон 0.90 ({n} элементов): {epsilon_90}
+Эпсилон 0.95 ({n} элементов): {epsilon_95}
+Эпсилон 0.99 ({n} элементов): {epsilon_99}
+()
+Оценка математического ожидания для {n} элементов: {expected_value}
+Оценка диперсии для {n} элементов: {dispersion}
+Оценка среднеквадратического отклонения для {n} элементов: {standard_deviation}
+Оценка коэффициента вариации для {n} элементов: {variation}
+Эпсилон 0.90 ({n} элементов): {epsilon_90}
+Эпсилон 0.95 ({n} элементов): {epsilon_95}
+Эпсилон 0.99 ({n} элементов): {epsilon_99}
+()
+Оценка математического ожидания для {n} элементов: {expected_value}
+Оценка диперсии для {n} элементов: {dispersion}
+Оценка среднеквадратического отклонения для {n} элементов: {standard_deviation}
+Оценка коэффициента вариации для {n} элементов: {variation}
+Эпсилон 0.90 ({n} элементов): {epsilon_90}
+Эпсилон 0.95 ({n} элементов): {epsilon_95}
+Эпсилон 0.99 ({n} элементов): {epsilon_99}
+()
+Оценка математического ожидания для {n} элементов: {expected_value}
+Оценка диперсии для {n} элементов: {dispersion}
+Оценка среднеквадратического отклонения для {n} элементов: {standard_deviation}
+Оценка коэффициента вариации для {n} элементов: {variation}
+Эпсилон 0.90 ({n} элементов): {epsilon_90}
+Эпсилон 0.95 ({n} элементов): {epsilon_95}
+Эпсилон 0.99 ({n} элементов): {epsilon_99}
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/figure.py", line 1034, in draw
+    func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/axes.py", line 2086, in draw
+    a.draw(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/axis.py", line 1105, in draw
+    self.label.draw(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 547, in draw
+    bbox, info, descent = self._get_layout(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 325, in _get_layout
+    clean_line, ismath = self.is_math_text(line)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 1000, in is_math_text
+    if cbook.is_math_text(s):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/cbook.py", line 1927, in is_math_text
+    "matplotlib display text must have all code points < 128 or use "
+ValueError: matplotlib display text must have all code points < 128 or use Unicode strings
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Коэффициент автокорреляции ({n}): {autocorr_coef}
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/figure.py", line 1034, in draw
+    func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/axes.py", line 2086, in draw
+    a.draw(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/axis.py", line 1105, in draw
+    self.label.draw(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 547, in draw
+    bbox, info, descent = self._get_layout(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 325, in _get_layout
+    clean_line, ismath = self.is_math_text(line)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 1000, in is_math_text
+    if cbook.is_math_text(s):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/cbook.py", line 1927, in is_math_text
+    "matplotlib display text must have all code points < 128 or use "
+ValueError: matplotlib display text must have all code points < 128 or use Unicode strings
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/figure.py", line 1034, in draw
+    func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/axes.py", line 2086, in draw
+    a.draw(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/axis.py", line 1105, in draw
+    self.label.draw(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/artist.py", line 55, in draw_wrapper
+    draw(artist, renderer, *args, **kwargs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 547, in draw
+    bbox, info, descent = self._get_layout(renderer)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 325, in _get_layout
+    clean_line, ismath = self.is_math_text(line)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/text.py", line 1000, in is_math_text
+    if cbook.is_math_text(s):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/cbook.py", line 1927, in is_math_text
+    "matplotlib display text must have all code points < 128 or use "
+ValueError: matplotlib display text must have all code points < 128 or use Unicode strings
+normalized mean = {sum(normalized) / len(normalized)}
+0.0288744742329
+0.0397849153493
+0.00788811162113
+0.0549192339862
+0.240890039263
+2.03317537565
+0.00555195597947
+0.0739114173333
+0.139584308
+0.0211329872389
+1.6480102895
+0.0235238860988
+1.39309677697
+0.0478780185062
+0.0191552167931
+9.58669977728
+0.0313333832042
+0.0107143846631
+0.0381101762822
+0.0896724604628
+0.0357465992866
+0.0322191611834
+0.0242564289267
+0.0310128248032
+3.7520850142
+0.0035491910752
+0.00571846389588
+1.25185945255
+0.0226844800806
+0.0146218319458
+0.0319925059974
+0.0179786814077
+0.0286122524889
+0.0257832030725
+0.0042105214629
+2.59325443543
+0.000994175745156
+0.0112275564079
+0.365698459105
+0.0400630123765
+0.0115691424231
+0.0525684622298
+0.0305526341623
+0.095761682195
+0.0104137192409
+0.00244096736782
+0.00584436228115
+0.0080251799161
+0.011591675816
+0.00767672076182
+0.0156680321219
+0.00829255874201
+0.0220686643364
+0.0243601681751
+0.00863716210083
+0.00982350344703
+0.000176241978816
+0.0271420370574
+0.0333907517783
+0.0613060915998
+0.0430778121832
+0.0126007849735
+0.108421848501
+0.0422960523019
+0.00790045066737
+3.13408749006
+15.8136189997
+0.0326244203447
+2.64798244223
+5.24673620787
+2.1028661391
+0.00488821473194
+0.00773868458239
+1.29630420558
+0.0124409719502
+0.0434199024111
+0.00147618413121
+0.0147815600539
+1.18795367884
+0.139012891475
+0.00985729912139
+0.0448612009252
+0.0130534694333
+0.0559505580748
+6.51701393449
+0.0143446347873
+0.0672040627322
+0.0101926995749
+0.0279563986933
+0.0799935164892
+0.00238623045359
+0.0286975976304
+0.025709065903
+0.0953612852667
+2.35729251275
+0.00402472114344
+0.0238345837887
+0.0291733546956
+0.0372143915072
+0.599460572128
+0.0123238000023
+0.0297925023082
+0.0344169415502
+0.449494283238
+0.0222945498683
+4.93436974774
+0.0547690570083
+0.00196309387867
+10.0678885151
+0.00688900465562
+0.0611819010596
+0.0583782224828
+0.115057504001
+0.0420368408597
+0.169867479727
+0.00134525498454
+0.00492165641091
+5.48141330526
+0.0571038431184
+0.012349265797
+0.0559704977953
+2.48767495637
+4.78156278579
+0.0139627365623
+0.0234284690141
+0.0638190215529
+0.00897035306594
+0.0322867138961
+1.912506223
+0.0265648569106
+0.0166573546114
+0.000123443336855
+10.0624796751
+0.0080416933432
+3.04863841478
+0.0155286769452
+0.0402389746284
+0.00249443435433
+0.0117327209309
+0.00912613633425
+0.110316779506
+0.0730515469018
+0.0230407992551
+0.095520689303
+0.0659053876773
+0.0306007682939
+0.0720385799917
+0.00467551493571
+4.56754850533
+0.0226334588171
+0.0134457149375
+0.0248543803389
+0.049894268623
+0.0354161467581
+0.0183397119911
+0.228336019604
+0.0281937875143
+9.35814929153
+1.65755209211
+0.609460300626
+0.000939773027772
+0.076851977561
+0.0158362332025
+0.0225087712861
+0.00717615748496
+0.0556512375802
+0.00999462761053
+0.0162968713586
+0.0589963834917
+0.177055845908
+2.5263516748
+0.0713273414793
+0.013427243433
+0.0295981346427
+0.0406904976078
+0.0336097968622
+9.20822345743
+0.0571397203607
+0.00901541859598
+0.0361326255957
+2.99235962563
+0.00367792876401
+0.13586386891
+0.163770948477
+0.028808575788
+0.0200754578438
+0.0092874019668
+0.0377364236614
+0.0218942983536
+0.0391086611009
+4.2951416381
+0.0810548548947
+0.0772197464982
+0.000205640667115
+5.01688139291
+2.71422749628
+0.012729222404
+0.340290625868
+0.0287350784837
+0.0369526511365
+0.013893439787
+0.136340548111
+6.13129993604e-05
+0.0122232052509
+1.88180036892
+0.0648988270915
+0.00112716108635
+0.0377075891958
+0.110879356421
+0.00915471141026
+0.163321623357
+0.00343006604643
+0.0469186402428
+0.00710620256422
+8.15611598937
+0.0354582516438
+0.00801863495048
+4.29720730415
+0.0189131209356
+0.0140816399348
+0.0394133800758
+0.0412749508902
+0.0356560277147
+5.54184552171
+0.0295593597968
+0.0134587215154
+0.878330842301
+2.39711038231
+0.0309580488573
+0.0381595524537
+0.00363367615097
+0.00402928798107
+0.0355839717311
+0.0933363520991
+0.0273951984474
+3.56329084093
+0.0377755517558
+0.0555061110143
+0.0419331310412
+0.00975271709197
+0.0334963914759
+0.0389702813862
+0.0745919923057
+0.0125989097842
+0.00281937649257
+0.0494493676103
+0.0351305531595
+0.0213588806297
+3.0804737028
+0.0801520258243
+0.0236583684991
+4.99858958367
+0.00910070488688
+1.4140948633
+0.00303053068158
+0.0032150721469
+0.633589264263
+0.0105566051814
+0.0635594450293
+2.69004601073
+3.6160213192
+0.0567853595661
+0.0100230744908
+0.854215566736
+0.0907284534694
+0.00531785469265
+0.0753611221185
+0.508230198909
+0.0566886808373
+1.03294039626
+0.0568220579436
+0.0064976193541
+0.000808361372101
+0.0178675921579
+0.000260788783096
+0.00827344163927
+0.0425142426296
+7.03136547273
+0.00329914628596
+0.0600336344834
+1.43338872781
+0.0117465577897
+0.00858717515578
+2.12761138332
+0.0158021778273
+0.0038104491827
+0.000454191800481
+0.0498167855879
+0.00552095194922
+0.00327631109334
+0.00467636679563
+0.0113590386633
+0.00597628225019
+1.75532644975
+0.0141521786972
+0.0507473674686
+0.17103658662
+0.0641687928157
+0.0529121141065
+0.00149391271477
+farruxkari-osx:Laba1 farruxkarimov$ 
