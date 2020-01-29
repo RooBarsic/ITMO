@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://java.sun.com/jsf/composite">
+<h:head>
+    <title>Tittle page</title>
+    <h:outputStylesheet name = "theme/css/newStyle.css"/>
+    <h:outputStylesheet name = "theme/css/style.css"/>
+    <h:outputScript library="js" name="time.js"/>
+</h:head>
+<h:body onload="updateClock()">
+    <div class = "header-style">
+        <div id = "name"><b>TRAN TRUNG DUC P3202</b></div>
+        <div id = "variant"> Variant </div>
+        <div id = "name1"><b>LE TUAN DUNG  P3200</b></div>
+        <div id = "number"> 20034 </div>
+        <br/>
+    </div>
+    <div id = "content">
+        <div id ="time"> </div>
+        <h:form>
+            <h:commandButton id="change" value="Go into" action="index1?faces-redirect=true"/>
+        </h:form>
+    </div>
+</h:body>
+</html>

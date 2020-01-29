@@ -1,0 +1,70 @@
+#body{
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#name{
+    width : 70%;
+    background : #EDE7FA;
+    color : #010101;
+    height : 50px;
+    float : left;
+    font-size : 50px;
+}
+#name1{
+    width : 70%;
+    background : #EDE7FA;
+    color : #010101;
+    height : 50px;
+    float : left;
+    font-size : 50px;
+}
+#variant{
+    width : 30%;
+    background : #B397F4;
+    color : #010101;
+    height : 50px;
+    float : right;
+    font-size : 50px;
+}
+#number{
+    width : 30%;
+    background : #B397F4;
+    color : #010101;
+    height : 50px;
+    float : right;
+    font-size : 50px;
+}
+.container{
+    width : 1000px;
+    height: 800px;
+    margin : 0 auto;
+    color : #FEFEFE;
+    position : relative;
+    border: 1px solid #333;
+    padding : 10px;
+    overflow : auto;
+    text-align : center;
+}
+table.center{
+    margin : 0px auto;
+    margin-top : 10px;
+}
+#form1{
+    color : #010101;
+    font-size: 0.5cm;
+}
+#work{
+    margin-top: 2%;
+    width : 40%;
+    float : right;
+}
+#image{
+    margin-top : 2%;
+    width : 60%;
+    float : left;
+}
+
+#XYRTable{
+    color : #010101;
+    font-size : 0.5cm;
+}
