@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://primefaces.org/ui">
+<h:head>
+    <title>PIP laba 2, Author : Farrukh Karimov P3202, Var : 200133</title>
+    <link rel="stylesheet" href="./styles/styles1.css" type="text/css"/>
+    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/scripts.js"></script>
+    <script type="text/javascript" src="./js/ClocksPrinter.js"></script>
+</h:head>
+<h:body>
+    <table id="zoneTable">
+        <tr id="zoneHat">
+            <td>
+                <h1> Karimov Farrukh Tojidinovich P3202/P3302 Var : 1942 </h1>
+            </td>
+        </tr>
+        <tr id="zoneContent">
+            <td>
+                <table class="contentTable" style="height:90%">
+                    <tr>
+                        <td class="contentTableTd" >
+                            <canvas id="plotClocks" height="30" width="450">
+                                Your brouser can't work with canvas
+                            </canvas>
+                            <br/>
+                            <h:form>
+                                <h:inputText id="userName" value="#{pointController.userName}" >
+                                    <f:validateLength minimum="2" maximum="8" />
+                                    <f:validateRegex pattern="([a-zA-Z])?([a-zA-Z])?([a-zA-Z])?([a-zA-Z])?([a-zA-Z])?([a-zA-Z])?([a-zA-Z])?([a-zA-Z])?" />
+                                </h:inputText>
+                                <br/>
+                                <h:message  for="userName"  style="color:red" />
+                                <br/>
+
+                                <h:commandButton id="submit3"  action="#{myString.addString(myString.myStr)}" value="Submit" style="margin: 15px 0 0 0; width: 200px" >
+
+                                </h:commandButton>
+
+                            </h:form>
+                            <a href="./MainFrame.xhtml"> Move to Main frame </a>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr id="zoneFooter">
+            <td>
+                <footer id="footer">
+                    <div align="center">
+                        <br/>
+                        <table class="footerTable">
+                            <td><h4>
+                                Создатели Farrukh Karimov. <br/>
+                                При поддержке Barsic.Enterprise.
+                            </h4></td>
+                        </table>
+                    </div>
+                </footer>
+            </td>
+        </tr>
+    </table>
+
+</h:body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:outputLabel value="Hello, world"/>
+    <h:form>
+        <h:inputText value="#{myString.myStr}" />
+
+        <h:commandButton value="Submit"  action="#{myString.addString(myString.myStr)}" style="margin: 15px 0 0 0; width: 200px" >
+            <f:ajax execute="@form" />
+        </h:commandButton>
+    </h:form>
+
+    <h:dataTable value="#{myString.myList}" var="str" >
+        <h:column >
+            <f:facet name="header">strings</f:facet>
+            #{str}
+        </h:column>
+    </h:dataTable>
+
+    <h:selectOneMenu id="menu"
+                     value="#{pointController.x}">
+        <f:selectItem itemValue="1" itemLabel="1" name="valueR" id="sha1"/>
+        <f:selectItem itemValue="2" itemLabel="2" name="valueR" />
+        <f:selectItem itemValue="3" itemLabel="3" name="valueR" />
+        <f:selectItem itemValue="4" itemLabel="4" name="valueR" />
+
+
+        <f:ajax render="XYRTable"/>
+        <f:selectItems value="#{myString.myList}"/>
+
+    </h:selectOneMenu>
+
+    <h:panelGroup id="XYRTable">
+        <h:dataTable id="mutant" value="#{myString.myList}" var="str" >
+            <h:column >
+                <f:facet name="header">strings</f:facet>
+                #{str}
+            </h:column>
+        </h:dataTable>
+    </h:panelGroup>
+
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<f:view>
+    <h:outputLabel value="Hello, world"/>
+    <h:form>
+        <h:inputText value="#{myString.myStr}" >
+            <f:ajax execute="@form" event="change" render=":XYRTable"/>
+        </h:inputText>
+
+        <h:commandButton value="Submit"  action="#{myString.addString(myString.myStr)}" style="margin: 15px 0 0 0; width: 200px" >
+            <f:ajax execute="@form" event="click" render=":XYRTable"/>
+        </h:commandButton>
+    </h:form>
+
+    <h:panelGroup id="XYRTable">
+        <h:dataTable id="mutant" value="#{myString.myList}" var="str" >
+        <h:column >
+            <f:facet name="header">strings</f:facet>
+            #{str}
+        </h:column>
+        </h:dataTable>
+    </h:panelGroup>
+</f:view>
+
+<script type="text/javascript">
+    function addRow(){
+        var id = "mutant";
+        var tbody = document.getElementById(id).getElementsByTagName("TBODY")[0];
+        var row = document.createElement("TR")
+        var td1 = document.createElement("TD")
+        td1.appendChild(document.createTextNode("column 1"))
+        //var td2 = document.createElement("TD")
+        //td2.appendChild (document.createTextNode("column 2"))
+        row.appendChild(td1);
+        //row.appendChild(td2);
+        tbody.appendChild(row);
+        return false;
+    }
+</script>
+
+<h1>Добавление строки в таблице с помощью DOM javascript</h1>
+<center>
+<p>Скрипт добавляет строку в таблицу, после нажатия на ссылку.</p>
+
+<a href="javascript://" onclick="addRow();">Добавить строку</a>
+<table id="myTable" cellspacing="0" border="1">
+    <tbody>
+    <tr>
+        <td>row1_column1</td><td>row1_column1</td>
+    </tr>
+    </tbody>
+</table>
+
+</center>
+</html>

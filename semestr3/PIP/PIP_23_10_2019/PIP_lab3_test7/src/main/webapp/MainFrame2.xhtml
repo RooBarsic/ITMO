@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://primefaces.org/ui">
+<h:head>
+    <title>PIP laba 2, Author : Farrukh Karimov P3202, Var : 200133</title>
+</h:head>
+<h:body id="mainBody">
+
+
+
+
+
+
+
+
+    <h1> Karimov Farrukh Tojidinovich P3202/P3302 Var : 1942 </h1>
+        <canvas id="plotClocks" height="30" width="450"
+                onclick="newPoint(event)"> Your brouser can't work with canvas
+        </canvas>
+    <canvas id="plotCanvas" height="300" width="300"
+            onclick="newPoint(event)"> Your brouser can't work with canvas
+    </canvas>
+
+    <br/>
+        Tut bedet uslovie <br/>
+        <h:form id="form1">
+            Значение X : <p:spinner min="-4.9" max="4.9" id="basic" value="#{pointController.x}" onkeypress="return false" placeholder="(-5; 5)" stepFactor="0.1">
+            <p:ajax update="@this" process="@this" />
+                <f:validateLength minimum="1" maximum="5"/>
+                <f:validateDoubleRange maximum="4.999999999999999999" minimum="-4.9999999999999999999" />
+            </p:spinner>
+            <h:message for="basic" style="color:red"/>
+            <br/>
+
+            <br/>
+            Значение Y :
+            <h:inputText value="#{pointController.y}" id="valueY"  placeholder="(-3; 3)"> <br/>
+                <f:validateLength minimum="1" maximum="6" />
+                <f:validateDoubleRange minimum="-2.999999999999" maximum="2.999999999999999999" />
+            </h:inputText> <br/>
+            <h:message for="valueY" style="color:red" />
+            <br/>
+
+            <br/>
+            Значение R :
+            <h:selectOneRadio id = "valueR" value="#{pointController.r}"  required="true" >
+                <f:selectItem itemValue="1" itemLabel="1" name="valueR" id="sha1"/>
+                <f:selectItem itemValue="2" itemLabel="2" name="valueR" />
+                <f:selectItem itemValue="3" itemLabel="3" name="valueR" />
+                <f:selectItem itemValue="4" itemLabel="4" name="valueR" />
+                <f:selectItem itemValue="5" itemLabel="5" name="valueR" />
+
+            </h:selectOneRadio>
+
+            <h:commandButton value="Submit" id="submit" action="#{pointController.savePoint()}" style="margin: 15px 0 0 0; width: 200px" >
+              <f:ajax execute="@form" render=":MyPanel"/>
+            </h:commandButton>
+
+        </h:form>
+        <br/>
+        <a href="./WelcomeFrame.xhtml"> Move to Welcome frame </a>
+
+        <h:form id = "CVform">
+            <h:inputHidden id = "CVvalueX" value="#{pointController.x}"/>
+            <h:inputHidden id = "CVvalueY" value="#{pointController.y}"/>
+            <h:inputHidden id = "CVvalueR" value="#{pointController.r}"/>
+            <h:inputHidden id = "CVresulr" value="#{pointController.result}" />
+            <h:commandButton id="CVsubmit" value="Submit" action="#{pointController.savePoint()}" style="display: none;">
+               <!--<f:ajax execute="@form" render=":XYRTable"/> -->
+            </h:commandButton>
+        </h:form>
+
+        <a href="./WelcomeFrame.xhtml"> Move to Welcome frame </a>
+
+
+
+
+
+    <h:form id = "form17">
+        <h3> Input String </h3>
+        <h3> Input X </h3>
+        <h:inputText value="#{myString.myStr}" />
+
+        <h:commandButton id="submit17"  action="#{myString.addString(myString.myStr)}" value="Submit" style="margin: 15px 0 0 0; width: 200px" >
+            <f:ajax execute="@form" render=":MyPanel"/>
+        </h:commandButton>
+        <br/>
+    </h:form>
+
+
+
+
+    <h:panelGroup id="MyPanel">
+        <h:dataTable value="#{DBConnector.getResultsHistory(pointController.userName)}" var="myPoint">
+            <h:column>
+                <f:facet name="header">My_xx</f:facet>
+                #{myPoint.x}
+            </h:column>
+        </h:dataTable>
+    </h:panelGroup>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer id="footer">
+    <div align="center">
+        <br/>
+        <table class="footerTable">
+            <td><h4>
+                Создатели Farrukh Karimov. <br/>
+                При поддержке Barsic.Enterprise.
+            </h4></td>
+        </table>
+    </div>
+</footer>
+
+    <link rel="stylesheet" href="./styles/styles1.css" type="text/css"/>
+    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/ScriptForMainFrame2.js"></script>
+    <script type="text/javascript" src="./js/ClocksPrinter.js"></script>
+
+</h:body>
+</html>
